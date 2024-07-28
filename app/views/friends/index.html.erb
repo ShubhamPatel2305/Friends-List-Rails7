@@ -1,0 +1,62 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Friends" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl py-6">Your Friends list</h1>
+  </div>
+
+  <div id="friends" class="min-w-full">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Contact
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Insta id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+              <% @friends.each do |friend| %>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= friend.name %>
+                </th>
+                <td class="px-6 py-4">
+                    <%= friend.email %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= friend.contact %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= friend.insta %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <%= link_to "Show", friend_path(friend), class: "text-blue-600 hover:text-blue-900 px-2" %>
+                    <%= link_to "Edit", edit_friend_path(friend), class: "text-indigo-600 hover:text-indigo-900 px-2" %>
+                    <%= link_to "Destroy", friend, method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 px-2" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+  </div>
+  <div class="flex justify-between items-center py-4">
+    <%= link_to "New friend", new_friend_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+</div>
