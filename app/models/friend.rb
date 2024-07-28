@@ -1,5 +1,7 @@
 class Friend < ApplicationRecord
 
+  belongs_to :user
+
   #if user submits a friend with same insta as alreadyexisting friend then dont accept and give error
   validates :insta, uniqueness: true
   validates :email, uniqueness: true
