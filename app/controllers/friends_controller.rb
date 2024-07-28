@@ -1,5 +1,15 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
+  #if user is not authenticated he cannot edit update or destroy a friend if he tries to do so he will be redirected to login page
+  before_action :authenticate_user!, only: %i[ edit update destroy ]
+  #if user is not the owner of the friend he cannot edit update or destroy a friend
+  before_action :check_user, only: %i[ edit update destroy ]
+  
+  def check_user
+    if current_user.id != @friend.user_id
+      redirect_to friends_path, notice: "You are not authorized to perform this action"
+    end
+  end
 
   # GET /friends or /friends.json
   def index
@@ -65,6 +75,6 @@ class FriendsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_params
-      params.require(:friend).permit(:name, :email, :contact, :insta)
+      params.require(:friend).permit(:name, :email, :contact, :insta, :user_id)
     end
 end
