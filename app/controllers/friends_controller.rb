@@ -65,6 +65,6 @@ class FriendsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_params
-      params.require(:friend).permit(:name, :email, :contact, :insta)
+      params.require(:friend).permit(:name, :email, :contact, :insta, :user_id)
     end
 end
