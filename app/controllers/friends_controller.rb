@@ -1,5 +1,7 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
+  #if user is not authenticated he cannot edit update or destroy a friend if he tries to do so he will be redirected to login page
+  before_action :authenticate_user!, only: %i[ edit update destroy ]
 
   # GET /friends or /friends.json
   def index
