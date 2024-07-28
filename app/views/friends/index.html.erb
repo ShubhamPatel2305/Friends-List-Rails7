@@ -46,9 +46,14 @@
                     <%= friend.insta %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <%= link_to "Show", friend_path(friend), class: "text-blue-600 hover:text-blue-900 px-2" %>
-                    <%= link_to "Edit", edit_friend_path(friend), class: "text-indigo-600 hover:text-indigo-900 px-2" %>
-                    <%= link_to "Destroy", friend, method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 px-2" %>
+                    <%# if user is owner of this friend then only he should be able to see the three buttons also see show button  %>
+                    <% if current_user == friend.user %>
+                    <a href="/friends/<%= friend.id %>/edit" class="text-blue-600
+                    hover:text-blue-900 px-2">Edit</a>
+                    <a href="/friends/<%= friend.id %>" data-confirm="Are you sure?" data-method="delete" rel="nofollow" class="text-red-600 hover:text-red-900 px-2">Destroy</a>
+                    <%# show button as well %>
+                    <a href="/friends/<%= friend.id %>" class="text-blue-600 hover:text-blue-900 px-2">Show</a>
+                    <% end %>   
                 </td>
             </tr>
             <% end %>
